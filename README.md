@@ -84,7 +84,7 @@ while True:
 - `input()`: Função que solicita entrada do usuário.
 - `print()`: Função que exibe uma mensagem na tela.
 - `title()`: Método de string que converte a primeira letra de cada palavra para maiúscula.
-- `fromv: Importa módulos ou funções específicas de um módulo.
+- `from`: Importa módulos ou funções específicas de um módulo.
 - `import`: Importa um módulo.
 - `while`: Inicia um loop que continua enquanto a condição for verdadeira.
 - `pass`: Indica que nada deve ser feito.
