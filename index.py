@@ -1,46 +1,27 @@
+import tkinter as tk
 from biblioteca import Livro
-from utils.utils import limpar_tela
 
-print("Escolha a opção que deseja\n------------------")
-while True:
+def main():
+    root = tk.Tk()
+    root.title("Sistema de Biblioteca")
+    root.geometry("600x400")
+
+    btn_cadastrar = tk.Button(root, text="Cadastrar Livro", command=Livro.cadastrar)
+    btn_cadastrar.pack(pady=20)
+
+    btn_listar = tk.Button(root, text="Listar Livros", command=Livro.listar_livros)
+    btn_listar.pack(pady=20)
     
-    print("\n1 - Cadastrar Livro")
-    print("2 - Listar Livros")
-    print("3 - Deletar um Livro")
-    print("4 - Sair")
-    
-    opcao = input("Digite a opção desejada: ")
-    
-    if opcao == '1':
-        Livro.cadastrar()
-        
-    elif opcao == '2': 
-        print("\nGostaria de pesquisar por um livro ou deseja listar todos?")
-        resposta = input("Digite 'pesquisar' ou 'listar': ")
-        if resposta == 'pesquisar':
-            titulo = input("Digite o título do livro: ")
-            for livro in Livro.livros:
-                if livro.titulo == titulo.title():
-                    print(f"\n(o autor {livro.autor} escreveu o livro {livro.titulo} em {livro.ano} e ele tem {livro.paginas} páginas.)")
-                    break
-            else:
-                print(f"O livro {titulo} não foi encontrado.")
-                
-        elif resposta == 'listar':
-            if not Livro.livros:
-                print("(Nenhum livro cadastrado.)")
-            else:
-                Livro.listar_livros()
-            
-        else:
-            print("Opção inválida.")
-    
-    elif opcao == '3':
-        Livro.deletar_livro()
-        
-    elif opcao == '4':
-        limpar_tela()
-        break
-    
-            
-        
+    btn_listar = tk.Button(root, text="Pesquisar Livros", command=Livro.pesquisar_livro)
+    btn_listar.pack(pady=20)
+
+    btn_deletar = tk.Button(root, text="Deletar Livro", command=Livro.deletar_livro)
+    btn_deletar.pack(pady=20)
+
+    btn_sair = tk.Button(root, text="Sair", command=root.quit)
+    btn_sair.pack(pady=20)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
