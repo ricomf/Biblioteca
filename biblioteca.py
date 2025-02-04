@@ -1,8 +1,6 @@
 class Livro:
     livros = []
     
-
-    
     def __init__(self, titulo, autor, editora, ano, genero, paginas):
         '''Método construtor da classe Livro.'''
         self.titulo = titulo.title()
@@ -11,11 +9,6 @@ class Livro:
         self.ano = ano
         self.genero = genero.title()
         self.paginas = paginas
-
-    @property
-    def titulo_autor(self):
-        '''Método para retornar o título e o autor do livro.'''
-        return f"{self.titlo} - {self.autor}"
 
     def aumentar_paginas(self, paginas):
         '''Método para aumentar o número de páginas do livro.'''
@@ -47,8 +40,18 @@ class Livro:
     @classmethod
     def listar_livros(cls):
         '''Método para listar os livros cadastrados.'''
+        print("\nLista de livros:\n")
         for livro in cls.livros:
             print(f'Título: {livro.titulo}, Autor: {livro.autor}, Ano: {livro.ano}')
-    
+       
+    @classmethod        
+    def deletar_livro(cls):
+        '''Método para deletar um livro.'''
+        titulo = input("Digite o título do livro que deseja deletar: ")
+        for livro in cls.livros:
+            if livro.titulo == titulo.title():
+                cls.livros.remove(livro)
+                print(f"\nO livro {titulo} foi deletado com sucesso.")        
+        
 # Livro para cadastro inicial
 Livro.livros.append(Livro("O Senhor dos Anéis", "J.R.R. Tolkien", "HarperCollins", 1954, "Fantasia", 1216))
