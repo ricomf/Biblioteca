@@ -7,7 +7,6 @@ while True:
     print("\n1 - Cadastrar Livro")
     print("2 - Listar Livros")
     print("3 - Deletar um Livro")
-    print("4 - Editar um Livro")
     print("4 - Sair")
     
     opcao = input("Digite a opção desejada: ")
