@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from biblioteca import Livro
+from PIL import Image
 
 def main():
     '''Aparencia da janela'''
@@ -13,8 +14,12 @@ def main():
     main_frame = ctk.CTkFrame(janela)
     main_frame.pack(fill="both", expand=True)
 
+    '''Carregar imagem'''
+    image_path = "imagens/livro.png"  # Substitua pelo caminho da sua imagem
+    image = ctk.CTkImage(Image.open(image_path), size=(20, 20))
+
     '''Botões'''
-    btn_cadastrar = ctk.CTkButton(main_frame, text="Cadastrar Livro", command=lambda: Livro.cadastrar(main_frame, main_frame), fg_color="gray20", hover_color="gray30", border_color="gray20", border_width=0)
+    btn_cadastrar = ctk.CTkButton(main_frame, text="Cadastrar Livro", image=image, compound="left", command=lambda: Livro.cadastrar(main_frame, main_frame), fg_color="gray20", hover_color="gray30", border_color="gray20", border_width=0)
     btn_cadastrar.pack(pady=20)
 
     btn_listar = ctk.CTkButton(main_frame, text="Listar Livros", command=Livro.listar_livros, fg_color="gray20", hover_color="gray30", border_color="gray20", border_width=0)

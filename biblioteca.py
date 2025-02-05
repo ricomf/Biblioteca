@@ -1,8 +1,9 @@
 import customtkinter as ctk
 from tkinter import messagebox
+import unicodedata
 
 class Livro:
-    livros = [] # Array
+    livros = []
 
     def __init__(self, titulo, autor, editora, ano, genero, paginas):
         self.titulo = titulo
@@ -13,10 +14,8 @@ class Livro:
         self.paginas = paginas
 
     @classmethod
-    def cadastrar(cls, parent_frame, main_frame): # Cadastrar livro
-        '''Função para cadastrar um novo livro.'''
+    def cadastrar(cls, parent_frame, main_frame):
         def submit():
-            '''Função para submeter o cadastro do livro.'''
             titulo = entry_titulo.get()
             autor = entry_autor.get()
             editora = entry_editora.get()
@@ -68,8 +67,7 @@ class Livro:
         btn_submit.pack(pady=20)
 
     @classmethod
-    def listar_livros(cls): # Listar livros
-        '''Função para listar os livros cadastrados.'''
+    def listar_livros(cls):
         if not cls.livros:
             cls.show_message("Listar Livros", "Nenhum livro cadastrado.")
         else:
@@ -77,25 +75,41 @@ class Livro:
             cls.show_message("Listar Livros", livros_str)
 
     @classmethod
-    def pesquisar_livro(cls): # Pesquisar livro
-        '''Função para pesquisar um livro pelo título.'''
-        titulo = ctk.CTkInputDialog(text="Digite o título do livro que deseja pesquisar:", title="Pesquisar Livro").get_input()
-        for livro in cls.livros:
-            if livro.titulo == titulo:
-                cls.show_message("Pesquisar Livro", f"O livro '{titulo}' com o autor '{livro.autor}' foi encontrado.")
-                return
-        cls.show_message("Pesquisar Livro", f"O livro '{titulo}' não foi encontrado.")
-    
+    def pesquisar_livro(cls):
+        titulo = ctk.CTkInputDialog(text="Digite parte do título do livro que deseja pesquisar:", title="Pesquisar Livro").get_input()
+
+        if not titulo:
+            cls.show_message("Pesquisar Livro", "Nenhum título foi inserido.")
+            return
+
+        titulo = cls.remover_acentos(titulo.strip().lower())
+        resultados = [livro for livro in cls.livros if titulo in cls.remover_acentos(livro.titulo.strip().lower())]
+
+        if resultados:
+            livros_str = "\n".join([f"{livro.titulo} por {livro.autor}" for livro in resultados])
+            cls.show_message("Pesquisar Livro", f"Livros encontrados:\n{livros_str}")
+        else:
+            cls.show_message("Pesquisar Livro", f"Nenhum livro encontrado com '{titulo}'.")
+
     @classmethod
-    def deletar_livro(cls): # Deletar livro
-        '''Função para deletar um livro pelo título.'''
+    def deletar_livro(cls):
         titulo = ctk.CTkInputDialog(text="Digite o título do livro que deseja deletar:", title="Deletar Livro").get_input()
+        if not titulo:
+            cls.show_message("Deletar Livro", "Nenhum título foi inserido.")
+            return
+
+        titulo = cls.remover_acentos(titulo.strip().lower())
         for livro in cls.livros:
-            if livro.titulo == titulo:
+            if cls.remover_acentos(livro.titulo.strip().lower()) == titulo:
                 cls.livros.remove(livro)
-                cls.show_message("Deletar Livro", f"O livro '{titulo}' foi deletado com sucesso.")
+                cls.show_message("Deletar Livro", f"O livro '{livro.titulo}' foi deletado com sucesso.")
                 return
+
         cls.show_message("Deletar Livro", f"O livro '{titulo}' não foi encontrado.")
+
+    @staticmethod
+    def remover_acentos(texto):
+        return ''.join(c for c in unicodedata.normalize('NFD', texto) if unicodedata.category(c) != 'Mn')
 
     @staticmethod
     def show_message(title, message):
