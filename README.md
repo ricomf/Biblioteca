@@ -87,4 +87,3 @@ while True:
 - `from`: Importa módulos ou funções específicas de um módulo.
 - `import`: Importa um módulo.
 - `while`: Inicia um loop que continua enquanto a condição for verdadeira.
-- `pass`: Indica que nada deve ser feito.
