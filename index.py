@@ -50,10 +50,10 @@ def main():
     #                             border_width=0)
     # btn_deletar.pack(pady=20)
 
-    # btn_sair = ctk.CTkButton(main_frame, text="Sair",
-    #                          command=janela.quit, fg_color="gray20",
-    #                          hover_color="gray30")
-    # btn_sair.pack(pady=30)
+    btn_sair = ctk.CTkButton(main_frame, text="Sair",
+                             command=janela.quit, fg_color="gray20",
+                             hover_color="gray30")
+    btn_sair.pack(pady=30)
 
     janela.mainloop()
     
