@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from entidade.livro import Livro
-# from PIL import Image
+from utils.limpa_tela import Tela_Limpa
 from view.cadastrar import Cadastro
 from view.listar import Listar
 from view.pesquisar import Pesquisar
@@ -19,6 +19,7 @@ def main():
     janela = ctk.CTk() 
     janela.title("Sistema de Biblioteca")
     janela.geometry("600x700")
+
     
     
     
@@ -28,7 +29,7 @@ def main():
 
 
     '''Botões'''
-    btn_cadastrar = ctk.CTkButton(main_frame, text="Cadastrar Estante",
+    btn_cadastrar = ctk.CTkButton(main_frame, text="Cadastrar Livro",
                                   compound="left", command=lambda: Cadastro(main_frame, main_frame).cadastrar(),
                                   fg_color="gray20", hover_color="gray30",
                                   border_color="gray20", border_width=0)
@@ -40,20 +41,21 @@ def main():
                                border_width=0)
     btn_listar.pack(pady=20)
     
-    btn_pesquisar = ctk.CTkButton(main_frame, text="Pesquisar Estantes",
+    btn_pesquisar = ctk.CTkButton(main_frame, text="Pesquisar Livro",
                                   command=Pesquisar.pesquisar_livro, fg_color="gray20",
                                   hover_color="gray30", border_color="gray20",
                                   border_width=0)
     btn_pesquisar.pack(pady=20)
 
-    btn_deletar = ctk.CTkButton(main_frame, text="Deletar Estante",
+    btn_deletar = ctk.CTkButton(main_frame, text="Deletar Livro",
                                 command=Deletar.deletar_livro, fg_color="gray20",
                                 hover_color="gray30", border_color="gray20",
                                 border_width=0)
     btn_deletar.pack(pady=20)
 
     btn_sair = ctk.CTkButton(main_frame, text="Sair",
-                             command=janela.quit, fg_color="gray20",
+                             command=janela.quit,
+                             fg_color="gray20",
                              hover_color="gray30")
     btn_sair.pack(pady=30)
 
@@ -65,3 +67,4 @@ if __name__ == "__main__":
     livro3 = Livro("Dom Quixote", "Miguel de Cervantes", "Nova Aguilar", 1605, "Romance", 1048)
     Livro.lista_livros.extend([livro1, livro2, livro3])
     main()
+    Tela_Limpa.limpar_tela()
