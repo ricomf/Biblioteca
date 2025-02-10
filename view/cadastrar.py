@@ -17,7 +17,7 @@ class Cadastro:
         paginas = self.entry_paginas.get()
         
         novo_livro = Livro(titulo, autor, editora, ano, genero, paginas)
-        Livro.livros.append(novo_livro)
+        Livro.lista_livros.append(novo_livro)
         messagebox.showinfo("Cadastro de Livro", f"O livro '{titulo}' foi cadastrado com sucesso!")
         self.cadastro_frame.pack_forget()
         self.main_frame.pack(fill="both", expand=True)

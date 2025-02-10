@@ -1,5 +1,5 @@
 class Livro:
-    livros = []
+    lista_livros = []
     
     def __init__(self, titulo, autor, editora, ano, genero, paginas):
         self.titulo = titulo
