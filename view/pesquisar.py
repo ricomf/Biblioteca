@@ -20,11 +20,10 @@ class Pesquisar:
             return
         
         titulo = Pesquisar.remover_acentos(titulo.strip().lower())
-        resultados = [livro for livro in Livro.lista_livros if titulo in Pesquisar.remover_acentos(livro.titulo.strip().lower())]
+        resultados = Livro.pesquisar_livro(titulo)
         
         if resultados:
-            livros_str = "\n".join([f"{livro.titulo} ({livro.ano}) - {livro.autor}" for livro in resultados])
+            livros_str = "\n".join([f"{livro[1]} ({livro[4]}) - {livro[2]}" for livro in resultados])
             messagebox.showinfo("Pesquisar Livro", livros_str)
         else:
             messagebox.showinfo("Pesquisar Livro", f"Nenhum livro encontrado com '{titulo}'.")
-
